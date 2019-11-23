@@ -79,6 +79,7 @@ class User(AbstractUser):
     @property
     def is_active(self):
         return self.active
+    
 
 class Post(models.Model):
     user    = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -89,3 +90,7 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    @property
+    def owner(self):
+        return self.user

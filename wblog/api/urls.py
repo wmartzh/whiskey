@@ -1,7 +1,7 @@
 from rest_framework import routers
 from django.conf.urls import url
 from django.urls import include, path
-from .views import UserViewSet,PostView
+from .views import UserViewSet,PostDetailView,PostAPIView
 
 from api import views
 
@@ -13,5 +13,7 @@ router.register(r'users', UserViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^posts/(?P<pk>\d+)/$', PostView.as_view(), name='posts')
+    url('login/',views.login),
+    url(r'^posts-detail/(?P<pk>\d+)/$', PostDetailView.as_view(), name='posts'),
+    url(r'^posts/', PostAPIView.as_view(), name='create-post'),
 ]
